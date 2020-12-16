@@ -1,0 +1,59 @@
+server:
+  port: 9991
+
+spring:
+  application:
+    name: bobCat-controller
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.162.245.91:80 #Nacos服务注册中心地址
+    sentinel:
+      transport:
+        dashboard: 10.162.244.26:8991
+        port: 8719
+      datasource:
+        ds1:
+          nacos:
+            server-addr: 10.162.245.91:80
+            dataId: cloudalibaba-sentinel-service
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+              #stream:
+              #binders: #在此处配置要绑定的rabbitmq的服务信息
+              #defaultRabbit: #表示定义的名称，用于binding整合
+              #type: rabbit #消息组件类型
+              #environment: #设置rabbitmq的相关环境配置
+              #spring:
+              #rabbitmq相关配置 15672是web管理界面的端口；5672是MQ访问的端口
+              #rabbitmq:
+              #host: 192.168.44.128
+              #port: 5672
+              #virtual-host: /
+              #username: guest
+            #password: administrator
+          #bindings: #服务的整合处理
+          #output: #这个名字是一个通道的名称
+          #destination: orderExchange #表示要使用的Exchange名称定义
+          #content-type: application/json #设置消息类型，本次为json，本文要设置为“text/plain”
+          #binders: defaultRabbit #设置要绑定的消息服务的具体设置
+  main:
+    #@FeignClient(value = "服务名r") 设置可以有多个类存在相同的FeignClient 中的value值
+    allow-bean-definition-overriding: true
+
+#消费者将去访问的微服务名称
+server-url:
+  nacos-user-service: http://bobCat-serivice
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+#激活Sentinel对Feign的支持
+feign:
+  sentinel:
+    enabled: true

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hui.bobCat.dao.db77.BobcatStationMappingDAO">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.hui.bobCat.been.BobcatStationMapping">
+        <result column="PDCA_STATION" property="pdcaStation" />
+        <result column="MES_TERMINAL" property="mesTerminal" />
+        <result column="ENABLED" property="enabled" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        PDCA_STATION, MES_TERMINAL, ENABLED
+    </sql>
+
+</mapper>

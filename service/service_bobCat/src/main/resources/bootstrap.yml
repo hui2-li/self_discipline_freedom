@@ -1,0 +1,33 @@
+server:
+  port: 8881
+
+spring:
+  application:
+    name: bobCat-serivice
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.162.245.91:80 #Nacos服务注册中心地址
+      config:
+        server-addr: 10.162.245.91:80 #Nacos作为配置中心地址
+        #file-extension: properties #指定yaml格式配置
+        namespace: 63066040-96cc-48fc-98a0-16b41f7ca47b #工作空间
+        extension-configs:
+          - dataId: nacos-config.properties
+            group: DEFAULT_GROUP
+            refresh: true
+          - dataid: mybatisplus-config.properties
+            group: dev
+            refresh: true
+          - dataid: dataSource.properties
+            group: dev
+            refresh: true
+        #group: DEFAULT_GROUP
+        refresh-enabled: true
+        enabled: true
+
+#mybatis-plus配置控制台打印完整带参数SQL语句
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

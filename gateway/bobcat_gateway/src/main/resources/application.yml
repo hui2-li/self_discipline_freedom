@@ -1,0 +1,27 @@
+server:
+  port: 8989
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: bobcat-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.162.245.91:80 #nacos服务注册中心地址
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心动态创建路由的功能，利用微服务名进行路由
+      routes:
+        - id: bobcat_routh #路由的ID，没有固定规则但要求唯一，建议配合服务名
+          uri: lb://bobCat-controller #匹配后提供服务的路由地址(也可以路由地址)
+          predicates:
+            - Path=/mes/**         # 断言，路径相匹配的进行路由
+    sentinel:
+      transport:
+        dashboard: 10.162.244.26:8991
+        #clientIp: 10.131.111.162 #如果sentinel没有实时监控到，到sentinel服务器ping，看是否ping通，如果ip地址错误请指定本地的ip地址
+        port: 8719
+
