@@ -30,6 +30,11 @@
             <artifactId>sentinel-transport-simple-http</artifactId>
         </dependency>
         <!-- SpringCloud ailibaba nacos-->
+        <!-- nacos config-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
@@ -91,6 +96,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <!--<scope>provided</scope>-->
         </dependency>
         <!--commons-io-->
         <dependency>

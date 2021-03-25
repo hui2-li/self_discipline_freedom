@@ -62,7 +62,7 @@ public enum CommonErrorCode implements ErrorCode {
     /**
      * 未知错误
      */
-    UNKOWN(999999,"未知错误");
+    UNKOWN(999999,"未知错误,请联系管理员处理");
 
 
     private int code;

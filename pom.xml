@@ -44,6 +44,7 @@
         <docker.image.prefix>zx</docker.image.prefix>
         <ojdbc6.version>11.2.0.4.0</ojdbc6.version>
         <druid.version>1.1.19</druid.version>
+        <!--<hutool.version>5.3.10</hutool.version>-->
     </properties>
 
     <dependencyManagement>
@@ -93,6 +94,12 @@
                 <artifactId>mybatis-plus-generator</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
+            <!--hutool是JAVA工具包-->
+            <!--<dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>-->
             <!-- 连接数据库 -->
             <!--<dependency>
                 <groupId>org.springframework</groupId>

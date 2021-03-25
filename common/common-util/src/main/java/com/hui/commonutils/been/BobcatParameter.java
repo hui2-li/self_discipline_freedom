@@ -6,6 +6,8 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * @author lihui
  * @title: BobcatParameter
@@ -18,193 +20,91 @@ import lombok.ToString;
 @ToString
 public class BobcatParameter {
 
-    @ApiModelProperty(value = "站点Id")
+    //调用存储过程需要的字段
     private String terminalId;
-
-    @ApiModelProperty(value = "sn(17码)")
     private String sn;
-
-    @ApiModelProperty(value = "不良")
+    private List<String> defectList;
     private String defect;
-
-    @ApiModelProperty(value = "上传时间")
     private String nowTime;
-
-    @ApiModelProperty(value = "emp")
     private String emp;
-
-    @ApiModelProperty(value = "开始时间")
     private String inProcessTime;
-
-    @ApiModelProperty(value = "结束时间")
     private String outProcessTime;
-
-    @ApiModelProperty(value = "版本")
     private String version;
-
-    @ApiModelProperty(value = "mac地址")
     private String macAddress;
-
-    @ApiModelProperty(value = "tres")
+    private String stationId;
     private String res;
-
-    @ApiModelProperty(value = "tNextProc")
-    private String nextProc;
-
-    @ApiModelProperty(value = "trecId(main_id)")
     private String trecId;
+    private String nextProc;
+    private String product              ;
 
-    @ApiModelProperty(value = "机种")
-    private String product;
+    //调用cg码的存储过程需要的字段
+    private String tcgSn;
+    private String processId;
+    private String cgsnRes;
 
-    @ApiModelProperty(value = "站点名称")
-    private String stationName;
+    //站点表需要的字段
+    private String mainId				;
+    private String result               ;
+    private String auditMode            ;
+    private String bobcatSignature      ;
+    private String cgSn                 ;
+    private String failureMessage       ;
+    private String fixtureId            ;
+    private String ft1LowerLimit        ;
+    private String ft1Message           ;
+    private String ft1SubSubTest        ;
+    private String ft1SubTest           ;
+    private String ft1Test              ;
+    private String ft1Units             ;
+    private String ft1UpperLimit        ;
+    private String ft1Value             ;
+    private String ft2LowerLimit        ;
+    private String ft2Message           ;
+    private String ft2SubSubTest        ;
+    private String ft2SubTest           ;
+    private String ft2Test              ;
+    private String ft2Units             ;
+    private String ft2UpperLimit        ;
+    private String ft2Value             ;
+    private String ft3LowerLimit        ;
+    private String ft3Message           ;
+    private String ft3SubSubTest        ;
+    private String ft3SubTest           ;
+    private String ft3Test              ;
+    private String ft3Units             ;
+    private String ft3UpperLimit        ;
+    private String ft3Value             ;
+    private String ft4LowerLimit        ;
+    private String ft4Message           ;
+    private String ft4SubSubTest        ;
+    private String ft4SubTest           ;
+    private String ft4Test              ;
+    private String ft4Units             ;
+    private String ft4UpperLimit        ;
+    private String ft4Value             ;
+    private String ft5LowerLimit        ;
+    private String ft5Message           ;
+    private String ft5SubSubTest        ;
+    private String ft5SubTest           ;
+    private String ft5Test              ;
+    private String ft5Units             ;
+    private String ft5UpperLimit        ;
+    private String ft5Value             ;
+    private String lcgSn                ;
+    //private String lcmFullSn            ;
+    private String listOfFailingTests   ;
+    private String mlbsn                ;
+    private String override             ;
+    private String sbuild               ;
+    private String stationString        ;
+    private String testHeadId           ;
+    private String testStationName      ;
 
-    @TableField("MAIN_ID")
-    private String mainId;
-
-    @TableField("UPLOAD_TIME")
-    private String uploadTime;
-
-    @TableField("AUDIT_MODE")
-    private String auditMode;
-
-    @TableField("BOBCAT_SIGNATURE")
-    private String bobcatSignature;
-
-    @TableField("FT_1_LOWER_LIMIT")
-    private String ft1LowerLimit;
-
-    @TableField("FT_1_MESSAGE")
-    private String ft1Message;
-
-    @TableField("FT_1_SUB_SUB_TEST")
-    private String ft1SubSubTest;
-
-    @TableField("FT_1_SUB_TEST")
-    private String ft1SubTest;
-
-    @TableField("FT_1_TEST")
-    private String ft1Test;
-
-    @TableField("FT_1_UNITS")
-    private String ft1Units;
-
-    @TableField("FT_1_UPPER_LIMIT")
-    private String ft1UpperLimit;
-
-    @TableField("FT_1_VALUE")
-    private String ft1Value;
-
-    @TableField("FT_2_LOWER_LIMIT")
-    private String ft2LowerLimit;
-
-    @TableField("FT_2_MESSAGE")
-    private String ft2Message;
-
-    @TableField("FT_2_SUB_SUB_TEST")
-    private String ft2SubSubTest;
-
-    @TableField("FT_2_SUB_TEST")
-    private String ft2SubTest;
-
-    @TableField("FT_2_TEST")
-    private String ft2Test;
-
-    @TableField("FT_2_UNITS")
-    private String ft2Units;
-
-    @TableField("FT_2_UPPER_LIMIT")
-    private String ft2UpperLimit;
-
-    @TableField("FT_2_VALUE")
-    private String ft2Value;
-
-    @TableField("FT_3_LOWER_LIMIT")
-    private String ft3LowerLimit;
-
-    @TableField("FT_3_MESSAGE")
-    private String ft3Message;
-
-    @TableField("FT_3_SUB_SUB_TEST")
-    private String ft3SubSubTest;
-
-    @TableField("FT_3_SUB_TEST")
-    private String ft3SubTest;
-
-    @TableField("FT_3_TEST")
-    private String ft3Test;
-
-    @TableField("FT_3_UNITS")
-    private String ft3Units;
-
-    @TableField("FT_3_UPPER_LIMIT")
-    private String ft3UpperLimit;
-
-    @TableField("FT_3_VALUE")
-    private String ft3Value;
-
-    @TableField("FT_4_LOWER_LIMIT")
-    private String ft4LowerLimit;
-
-    @TableField("FT_4_MESSAGE")
-    private String ft4Message;
-
-    @TableField("FT_4_SUB_SUB_TEST")
-    private String ft4SubSubTest;
-
-    @TableField("FT_4_SUB_TEST")
-    private String ft4SubTest;
-
-    @TableField("FT_4_TEST")
-    private String ft4Test;
-
-    @TableField("FT_4_UNITS")
-    private String ft4Units;
-
-    @TableField("FT_4_UPPER_LIMIT")
-    private String ft4UpperLimit;
-
-    @TableField("FT_4_VALUE")
-    private String ft4Value;
-
-    @TableField("FT_5_LOWER_LIMIT")
-    private String ft5LowerLimit;
-
-    @TableField("FT_5_MESSAGE")
-    private String ft5Message;
-
-    @TableField("FT_5_SUB_SUB_TEST")
-    private String ft5SubSubTest;
-
-    @TableField("FT_5_SUB_TEST")
-    private String ft5SubTest;
-
-    @TableField("FT_5_TEST")
-    private String ft5Test;
-
-    @TableField("FT_5_UNITS")
-    private String ft5Units;
-
-    @TableField("FT_5_UPPER_LIMIT")
-    private String ft5UpperLimit;
-
-    @TableField("FT_5_VALUE")
-    private String ft5Value;
-
-    @TableField("LCG_SN")
-    private String lcgSn;
-
-    @TableField("OVERRIDE")
-    private String override;
-
-    @TableField("FIXTURE_ID")
-    private String fixTrueId;
-
-    @TableField("STATION_STRING")
-    private String stationString;
-
-    @TableField("TEST_HEAD_ID")
-    private String testHeadId;
-
+    /**
+     * 新加字段（原始bobcat没有这些字段）
+     */
+    private String errCode              ;
+    private String errString            ;
+    private String carrierPn            ;
+    private String carrierDcId          ;
 }

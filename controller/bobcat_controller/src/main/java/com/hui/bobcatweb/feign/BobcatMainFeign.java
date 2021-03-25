@@ -27,5 +27,5 @@ public interface BobcatMainFeign {
      */
     @RequestMapping(value = "/bobcat/index.cgi",method = RequestMethod.POST)
     @ResponseBody
-    public R bobCat(@RequestBody BobcatParameter params);
+    public Boolean bobCat(@RequestBody BobcatParameter params);
 }

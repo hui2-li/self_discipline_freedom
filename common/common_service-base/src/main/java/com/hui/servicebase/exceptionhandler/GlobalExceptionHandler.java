@@ -26,9 +26,9 @@ public class GlobalExceptionHandler {
      * @param e
      * @return
      */
-    //@ExceptionHandler(value = Exception.class)
-    //@ResponseBody
-    //@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(value = Exception.class)
+    @ResponseBody
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public R processExcetion(HttpServletRequest request,
                                            HttpServletResponse response,
                                            Exception e){

@@ -15,7 +15,7 @@ import java.util.Map;
 public class R {
 
     @ApiModelProperty(value = "是否成功")
-    private Boolean success;
+    private Boolean state;
 
     @ApiModelProperty(value = "返回码")
     private Integer code;
@@ -32,7 +32,7 @@ public class R {
     //成功静态方法
     public static R ok() {
         R r = new R();
-        r.setSuccess(true);
+        r.setState(true);
         r.setCode(ResultCode.SUCCESS);
         r.setMessage("success");
         return r;
@@ -41,14 +41,14 @@ public class R {
     //失败静态方法
     public static R error() {
         R r = new R();
-        r.setSuccess(false);
+        r.setState(false);
         r.setCode(ResultCode.ERROR);
         r.setMessage("fail");
         return r;
     }
 
     public R success(Boolean success){
-        this.setSuccess(success);
+        this.setState(success);
         return this;
     }
 

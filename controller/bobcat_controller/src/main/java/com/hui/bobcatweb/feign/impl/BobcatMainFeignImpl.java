@@ -22,8 +22,9 @@ public class BobcatMainFeignImpl implements BobcatMainFeign {
     private Throwable cause;
 
     @Override
-    public R bobCat(BobcatParameter params) {
+    public Boolean bobCat(BobcatParameter params) {
         log.error("feign调用异常"+cause);
-        return R.error();
+        return false;
     }
+
 }

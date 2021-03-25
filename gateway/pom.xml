@@ -16,7 +16,11 @@
     </modules>
 
     <dependencies>
-        <!--gateway-->
+        <dependency>
+            <groupId>com.hui</groupId>
+            <artifactId>common_service-base</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <!--gateway-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -31,6 +35,11 @@
             <artifactId>spring-cloud-alibaba-sentinel-gateway</artifactId>
         </dependency>
         <!-- SpringCloud ailibaba nacos-->
+        <!-- nacos config-->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
