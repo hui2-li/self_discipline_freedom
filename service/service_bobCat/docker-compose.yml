@@ -1,0 +1,42 @@
+version: '3.3'
+
+services:
+  service-bobcat-1:
+    restart: always
+    volumes:
+      - "/usr/local/logs:/logs/"
+      - "/etc/localtime:/etc/localtime" #容器时间和宿主机时间一致
+    build: #构建当前目录下的项目
+      context: .
+      dockerfile: Dockerfile7771
+    image: service-bobcat-1
+    ports:
+      - "7771:7771" # 端口
+
+  service-bobcat-2:
+    restart: always
+    volumes:
+      - "/usr/local/logs:/logs/"
+      - "/etc/localtime:/etc/localtime"
+    build:
+      context: .
+      dockerfile: Dockerfile7772
+    image: service-bobcat-2
+    ports:
+      - "7772:7772" # 端口
+
+  service-bobcat-3:
+    restart: always
+    volumes:
+      - "/usr/local/logs:/logs/"
+      - "/etc/localtime:/etc/localtime"
+    build:
+      context: .
+      dockerfile: Dockerfile7773
+    image: service-bobcat-3
+    ports:
+      - "7773:7773" # 端口
+networks:
+  default:
+    external:
+      name: bobcat-net

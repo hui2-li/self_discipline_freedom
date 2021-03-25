@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hui.bobCat.dao.db77.BobcatMain">
+
+    <resultMap id="BaseResultMap" type="com.hui.commonutils.been.BobcatParameter">
+        <result column="tterminalid" property="terminalId" />
+        <result column="tsn" property="sn" />
+        <result column="tdefect" property="defect" />
+        <result column="tnow" property="nowTime" />
+        <result column="temp" property="emp" />
+        <result column="tin_process_time" property="inProcessTime" />
+        <result column="tout_process_time" property="outProcessTime" />
+        <result column="tversion" property="version" />
+        <result column="tmac_address" property="macAddress" />
+        <result column="tres" property="res" />
+        <result column="tnextproc" property="nextProc" />
+        <result column="trecid" property="trecId" />
+    </resultMap>
+
+    <resultMap id="BasecgSnMap" type="com.hui.commonutils.been.BobcatParameter">
+        <result column="tsn" property="sn" />
+        <result column="tcg" property="tcgSn" />
+        <result column="tterminalid" property="terminalId" />
+        <result column="tprocessid" property="processId" />
+        <result column="temp" property="emp" />
+        <result column="tres" property="cgsnRes" />
+    </resultMap>
+
+    <select id="queryMainId" statementType="CALLABLE" parameterType="com.hui.commonutils.been.BobcatParameter" resultMap="BaseResultMap">
+        call sajet.sj_transfer_pdca(  #{terminalId,mode=IN,jdbcType=VARCHAR} ,
+                                #{sn,mode=IN,jdbcType=VARCHAR} ,
+                                #{defect,mode=IN,jdbcType=VARCHAR} ,
+                                to_date(#{nowTime,mode=IN},'yyyy-mm-dd hh24:mi:ss'),
+                                #{emp,mode=IN,jdbcType=VARCHAR} ,
+                                to_date(#{inProcessTime,mode=IN},'yyyy-mm-dd hh24:mi:ss'),
+                                to_date(#{outProcessTime,mode=IN},'yyyy-mm-dd hh24:mi:ss'),
+                                #{version,mode=IN,jdbcType=VARCHAR} ,
+                                #{macAddress,mode=IN,jdbcType=VARCHAR},
+                                #{res,mode=OUT,jdbcType=VARCHAR} ,
+                                #{nextProc,mode=OUT,jdbcType=VARCHAR},
+                                #{trecId,mode=OUT,jdbcType=VARCHAR}
+            )
+    </select>
+
+    <select id="queryCgSn" statementType="CALLABLE" parameterType="com.hui.commonutils.been.BobcatParameter" resultMap="BasecgSnMap">
+        call sajet.sj_tm_cg( #{sn,mode=IN,jdbcType=VARCHAR} ,
+            #{tcgSn,mode=IN,jdbcType=VARCHAR} ,
+            #{terminalId,mode=IN,jdbcType=VARCHAR} ,
+            #{processId,mode=IN,jdbcType=VARCHAR} ,
+            #{emp,mode=IN,jdbcType=VARCHAR} ,
+            #{cgsnRes,mode=OUT,jdbcType=VARCHAR}
+            )
+    </select>
+
+    <insert id="insertStationTable" parameterType="com.hui.commonutils.been.BobcatParameter">
+        <if test="tableName != null and tableName != '' ">
+        insert into ${tableName}
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="params.mainId != null and params.mainId != ''">
+                    main_id,
+                </if>
+                    UPLOAD_TIME,
+                <if test="params.auditMode != null and params.auditMode != '' ">
+                    audit_mode,
+                </if>
+                <if test="params.bobcatSignature != null and params.bobcatSignature  != ''">
+                    bobcat_signature,
+                </if>
+                <if test="params.cgSn != null and params.cgSn != ''">
+                    cg_sn,
+                </if>
+                <if test="params.failureMessage != null and params.failureMessage != ''">
+                    failure_message,
+                </if>
+                <if test="params.fixtureId != null and params.fixtureId != '' ">
+                    fixture_id,
+                </if>
+                <if test="params.ft1LowerLimit != null and params.ft1LowerLimit  != ''">
+                    ft_1_lower_limit,
+                </if>
+                <if test="params.ft1Message != null and params.ft1Message  != ''">
+                    ft_1_message,
+                </if>
+                <if test="params.ft1SubSubTest != null and params.ft1SubSubTest != ''">
+                    ft_1_sub_sub_test,
+                </if>
+                <if test="params.ft1SubTest != null and params.ft1SubTest != ''">
+                    ft_1_sub_test,
+                </if>
+                <if test="params.ft1Test != null and params.ft1Test != '' ">
+                    ft_1_test,
+                </if>
+                <if test="params.ft1Units != null and params.ft1Units  != ''">
+                    ft_1_units,
+                </if>
+                <if test="params.ft1UpperLimit != null and params.ft1UpperLimit != ''">
+                    ft_1_upper_limit,
+                </if>
+                <if test="params.ft1Value != null and params.ft1Value != ''">
+                    ft_1_value,
+                </if>
+                <if test="params.ft2LowerLimit != null and params.ft2LowerLimit != '' ">
+                    ft_2_lower_limit,
+                </if>
+                <if test="params.ft2Message != null and params.ft2Message  != ''">
+                    ft_2_message,
+                </if>
+                <if test="params.ft2SubSubTest != null and params.ft2SubSubTest != ''">
+                    ft_2_sub_sub_test,
+                </if>
+                <if test="params.ft2SubTest != null and params.ft2SubTest != '' ">
+                    ft_2_sub_test,
+                </if>
+                <if test="params.ft2Test != null and params.ft2Test  != ''">
+                    ft_2_test,
+                </if>
+                <if test="params.ft2Units != null and params.ft2Units != ''">
+                    ft_2_units,
+                </if>
+                <if test="params.ft2UpperLimit != null and params.ft2UpperLimit != '' ">
+                    ft_2_upper_limit,
+                </if>
+                <if test="params.ft2Value != null and params.ft2Value  != ''">
+                    ft_2_value,
+                </if>
+                <if test="params.ft3LowerLimit != null and params.ft3LowerLimit != ''">
+                    ft_3_lower_limit,
+                </if>
+                <if test="params.ft3Message != null and params.ft3Message != '' ">
+                    ft_3_message,
+                </if>
+                <if test="params.ft3SubSubTest != null and params.ft3SubSubTest  != ''">
+                    ft_3_sub_sub_test,
+                </if>
+                <if test="params.ft3SubTest != null and params.ft3SubTest != ''">
+                    ft_3_sub_test,
+                </if>
+                <if test="params.ft3Test != null and params.ft3Test != '' ">
+                    ft_3_test,
+                </if>
+                <if test="params.ft3UpperLimit != null and params.ft3UpperLimit  != ''">
+                    ft_3_upper_limit,
+                </if>
+                <if test="params.ft3Value != null and params.ft3Value != ''">
+                    ft_3_value,
+                </if>
+                <if test="params.ft4LowerLimit != null and params.ft4LowerLimit != '' ">
+                    ft_4_lower_limit,
+                </if>
+                <if test="params.ft4Message != null and params.ft4Message  != ''">
+                    ft_4_message,
+                </if>
+                <if test="params.ft4SubSubTest != null and params.ft4SubSubTest != '' ">
+                    ft_4_sub_sub_test,
+                </if>
+                <if test="params.ft4SubTest != null and params.ft4SubTest  != ''">
+                    ft_4_sub_test,
+                </if>
+                <if test="params.ft4Test != null and params.ft4Test != ''">
+                    ft_4_test,
+                </if>
+                <if test="params.ft4Units != null and params.ft4Units != '' ">
+                    ft_4_units,
+                </if>
+                <if test="params.ft4UpperLimit != null and params.ft4UpperLimit  != ''">
+                    ft_4_upper_limit,
+                </if>
+                <if test="params.ft4Value != null and params.ft4Value  != ''">
+                    ft_4_value,
+                </if>
+                <if test="params.ft5LowerLimit != null and params.ft5LowerLimit != ''">
+                    ft_5_lower_limit,
+                </if>
+                <if test="params.ft5Message != null and params.ft5Message != '' ">
+                    ft_5_message,
+                </if>
+                <if test="params.ft5SubSubTest != null and params.ft5SubSubTest  != ''">
+                    ft_5_sub_sub_test,
+                </if>
+                <if test="params.ft5SubTest != null and params.ft5SubTest  != ''">
+                    ft_5_sub_test,
+                </if>
+                <if test="params.ft5Test != null and params.ft5Test != ''">
+                    ft_5_test,
+                </if>
+                <if test="params.ft5Units != null and params.ft5Units != ''">
+                    ft_5_units,
+                </if>
+                <if test="params.ft5UpperLimit != null and params.ft5UpperLimit != ''">
+                    ft_5_upper_limit,
+                </if>
+                <if test="params.ft5Value != null and params.ft5Value != ''">
+                    ft_5_value,
+                </if>
+                <if test="params.lcgSn != null and params.lcgSn != ''">
+                    lcg_sn,
+                </if>
+                <if test="params.listOfFailingTests != null and params.listOfFailingTests != ''">
+                    list_of_failing_tests,
+                </if>
+                <if test="params.mlbsn != null and params.mlbsn != ''">
+                    mlbsn,
+                </if>
+                <if test="params.override != null and params.override != ''">
+                    override,
+                </if>
+                <if test="params.sbuild != null and params.sbuild != ''">
+                    sbuild,
+                </if>
+                <if test="params.stationString != null and params.stationString != ''">
+                    station_string,
+                </if>
+                <if test="params.testHeadId != null and params.testHeadId != ''">
+                    test_head_id,
+                </if>
+                <if test="params.testStationName != null and params.testStationName != ''">
+                    test_station_name,
+                </if>
+                <if test="params.errCode != null and params.errCode != ''">
+                    errCode,
+                </if>
+                <if test="params.errString != null and params.errString != ''">
+                    errString,
+                </if>
+                <if test="params.carrierPn != null and params.carrierPn != ''">
+                    carrier_pn,
+                </if>
+                <if test="params.carrierDcId != null and params.carrierDcId">
+                    carrierDcId,
+                </if>
+            </trim>
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="params.mainId != null and params.mainId != ''">
+                    #{params.mainId} ,
+                </if>
+                sysdate,
+                <if test="params.auditMode != null and params.auditMode != '' ">
+                    #{params.mainId} ,
+                </if>
+                <if test="params.bobcatSignature != null and params.bobcatSignature  != ''">
+                    #{params.bobcatSignature} ,
+                </if>
+                <if test="params.cgSn != null and params.cgSn != ''">
+                    #{params.cgSn} ,
+                </if>
+                <if test="params.failureMessage != null and params.failureMessage != ''">
+                    #{params.failureMessage},
+                </if>
+                <if test="params.fixtureId != null and params.fixtureId != '' ">
+                    #{params.fixtureId},
+                </if>
+                <if test="params.ft1LowerLimit != null and params.ft1LowerLimit  != ''">
+                    #{params.ft1LowerLimit},
+                </if>
+                <if test="params.ft1Message != null and params.ft1Message  != ''">
+                    #{params.ft1Message},
+                </if>
+                <if test="params.ft1SubSubTest != null and params.ft1SubSubTest != ''">
+                    #{params.ft1SubSubTest},
+                </if>
+                <if test="params.ft1SubTest != null and params.ft1SubTest != ''">
+                    #{params.ft1SubTest},
+                </if>
+                <if test="params.ft1Test != null and params.ft1Test != '' ">
+                    #{params.ft1Test},
+                </if>
+                <if test="params.ft1Units != null and params.ft1Units  != ''">
+                    #{params.ft1Units},
+                </if>
+                <if test="params.ft1UpperLimit != null and params.ft1UpperLimit != ''">
+                    #{params.ft1UpperLimit},
+                </if>
+                <if test="params.ft1Value != null and params.ft1Value != ''">
+                    #{params.ft1Value},
+                </if>
+                <if test="params.ft2LowerLimit != null and params.ft2LowerLimit != '' ">
+                    #{params.ft2LowerLimit},
+                </if>
+                <if test="params.ft2Message != null and params.ft2Message  != ''">
+                    #{params.ft2Message},
+                </if>
+                <if test="params.ft2SubSubTest != null and params.ft2SubSubTest != ''">
+                    #{params.ft2SubSubTest},
+                </if>
+                <if test="params.ft2SubTest != null and params.ft2SubTest != '' ">
+                    #{params.ft2SubTest},
+                </if>
+                <if test="params.ft2Test != null and params.ft2Test  != ''">
+                    #{params.ft2Test},
+                </if>
+                <if test="params.ft2Units != null and params.ft2Units != ''">
+                    #{params.ft2Units},
+                </if>
+                <if test="params.ft2UpperLimit != null and params.ft2UpperLimit != '' ">
+                    #{params.ft2UpperLimit},
+                </if>
+                <if test="params.ft2Value != null and params.ft2Value  != ''">
+                    #{params.ft2Value},
+                </if>
+                <if test="params.ft3LowerLimit != null and params.ft3LowerLimit != ''">
+                    #{params.ft3LowerLimit},
+                </if>
+                <if test="params.ft3Message != null and params.ft3Message != '' ">
+                    #{params.ft3Message},
+                </if>
+                <if test="params.ft3SubSubTest != null and params.ft3SubSubTest  != ''">
+                    #{params.ft3SubSubTest},
+                </if>
+                <if test="params.ft3SubTest != null and params.ft3SubTest != ''">
+                    #{params.ft3SubTest},
+                </if>
+                <if test="params.ft3Test != null and params.ft3Test != '' ">
+                    #{params.ft3Test},
+                </if>
+                <if test="params.ft3UpperLimit != null and params.ft3UpperLimit  != ''">
+                    #{params.ft3UpperLimit},
+                </if>
+                <if test="params.ft3Value != null and params.ft3Value != ''">
+                    #{params.ft3Value},
+                </if>
+                <if test="params.ft4LowerLimit != null and params.ft4LowerLimit != '' ">
+                    #{params.ft4LowerLimit},
+                </if>
+                <if test="params.ft4Message != null and params.ft4Message  != ''">
+                    #{params.ft4Message},
+                </if>
+                <if test="params.ft4SubSubTest != null and params.ft4SubSubTest != '' ">
+                    #{params.ft4SubSubTest},
+                </if>
+                <if test="params.ft4SubTest != null and params.ft4SubTest  != ''">
+                    #{params.ft4SubTest},
+                </if>
+                <if test="params.ft4Test != null and params.ft4Test != ''">
+                    #{params.ft4Test},
+                </if>
+                <if test="params.ft4Units != null and params.ft4Units != '' ">
+                    #{params.ft4Units},
+                </if>
+                <if test="params.ft4UpperLimit != null and params.ft4UpperLimit  != ''">
+                    #{params.ft4UpperLimit},
+                </if>
+                <if test="params.ft4Value != null and params.ft4Value  != ''">
+                    #{params.ft4Value},
+                </if>
+                <if test="params.ft5LowerLimit != null and params.ft5LowerLimit != ''">
+                    #{params.ft5LowerLimit},
+                </if>
+                <if test="params.ft5Message != null and params.ft5Message != '' ">
+                    #{params.ft5Message},
+                </if>
+                <if test="params.ft5SubSubTest != null and params.ft5SubSubTest  != ''">
+                    #{params.ft5SubSubTest},
+                </if>
+                <if test="params.ft5SubTest != null and params.ft5SubTest  != ''">
+                    #{params.ft5SubTest},
+                </if>
+                <if test="params.ft5Test != null and params.ft5Test != ''">
+                    #{params.ft5Test},
+                </if>
+                <if test="params.ft5Units != null and params.ft5Units != ''">
+                    #{params.ft5Units},
+                </if>
+                <if test="params.ft5UpperLimit != null and params.ft5UpperLimit != ''">
+                    #{params.ft5UpperLimit},
+                </if>
+                <if test="params.ft5Value != null and params.ft5Value != ''">
+                    #{params.ft5Value},
+                </if>
+                <if test="params.lcgSn != null and params.lcgSn != ''">
+                    #{params.lcgSn},
+                </if>
+                <if test="params.listOfFailingTests != null and params.listOfFailingTests != ''">
+                    #{params.listOfFailingTests},
+                </if>
+                <if test="params.mlbsn != null and params.mlbsn != ''">
+                    #{params.mlbsn},
+                </if>
+                <if test="params.override != null and params.override != ''">
+                    #{params.override},
+                </if>
+                <if test="params.sbuild != null and params.sbuild != ''">
+                    #{params.sbuild},
+                </if>
+                <if test="params.stationString != null and params.stationString != ''">
+                    #{params.stationString},
+                </if>
+                <if test="params.testHeadId != null and params.testHeadId != ''">
+                    #{params.testHeadId},
+                </if>
+                <if test="params.testStationName != null and params.testStationName != ''">
+                    #{params.testStationName},
+                </if>
+                <if test="params.errCode != null and params.errCode != ''">
+                    #{params.errCode},
+                </if>
+                <if test="params.errString != null and params.errString != ''">
+                    #{params.errString},
+                </if>
+                <if test="params.carrierPn != null and params.carrierPn != ''">
+                    #{params.carrierPn},
+                </if>
+                <if test="params.carrierDcId != null and params.carrierDcId">
+                    #{params.carrierDcId},
+                </if>
+            </trim>
+        </if>
+    </insert>
+
+</mapper>

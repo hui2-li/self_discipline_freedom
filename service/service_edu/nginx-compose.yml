@@ -1,0 +1,73 @@
+version: '3.3'
+
+services:
+  service-bobcat-1:
+    restart: always
+    volumes:
+      - ./service/logs:/logs/
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    image: service-bobcat-1
+    ports:
+      - "7771:7771" # 端口
+
+  service-bobcat-2:
+    restart: always
+    volumes:
+      - ./service/logs:/logs/
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    image: service-bobcat-2
+    ports:
+      - "7772:7771" # 端口
+
+  service-bobcat-3:
+    restart: always
+    volumes:
+      - ./service/logs:/logs/
+    build:
+      context: ./service
+      dockerfile: Dockerfile
+    image: service-bobcat-3
+    ports:
+      - "7773:7771" # 端口
+
+  controller-bobcat-1:
+    restart: always
+    volumes:
+      - ./controller/logs:/logs/
+    build: #构建当前目录下的项目
+      context: ./controller
+      dockerfile: Dockerfile
+    image: controller-bobcat-1
+    ports:
+      - "6661:6661" # 端口
+
+  controller-bobcat-2:
+    restart: always
+    volumes:
+      - ./controller/logs:/logs/
+    build: #构建当前目录下的项目
+      context: ./controller
+      dockerfile: Dockerfile
+    image: controller-bobcat-2
+    ports:
+      - "6662:6661" # 端口
+
+  controller-bobcat-3:
+    restart: always
+    volumes:
+      - ./controller/logs:/logs/
+    build: #构建当前目录下的项目
+      context: ./controller
+      dockerfile: Dockerfile
+    image: controller-bobcat-3
+    ports:
+      - "6663:6661" # 端口
+
+networks:
+  default:
+    external:
+      name: bobcat-net

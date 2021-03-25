@@ -1,0 +1,32 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: bobCat-serivice
+  cloud:
+    nacos:
+      discovery:
+        server-addr: nacos1:8848,nacos2:8848,nacos3:8848 #Nacos服务注册中心地址
+        #namespace: 63066040-96cc-48fc-98a0-16b41f7ca47b #注册到对应的工作空间
+        #ip: 10.162.244.137
+      config:
+        #server-addr: 10.162.245.91:80 #Nacos作为配置中心地址
+        server-addr: nacos1:8848,nacos2:8848,nacos3:8848
+        #file-extension: properties #指定yaml格式配置
+        namespace: b425afb4-e5b3-4885-a105-7ad068c6e2b9 #工作空间
+        extension-configs:
+          - dataId: ${spring.application.name}-${spring.profiles.active}.yaml
+            group: dev
+            refresh: true
+          - dataid: mybatisplus-config.properties
+            group: dev
+            refresh: true
+          - dataid: dataSource.properties
+            group: dev
+            refresh: true
+        #group: DEFAULT_GROUP
+        refresh-enabled: true
+        enabled: true
+
+
+
