@@ -1,42 +1,121 @@
-version: '3.3'
+version: '3.7'
 
 services:
-  service-bobcat-1:
+  nacos_cluster_1:
+    container_name: nacos_cluster_1
+    image: nacos/nacos-server:1.2.0
     restart: always
-    volumes:
-      - "/usr/local/logs:/logs/"
-      - "/etc/localtime:/etc/localtime" #容器时间和宿主机时间一致
-    build: #构建当前目录下的项目
-      context: .
-      dockerfile: Dockerfile7771
-    image: service-bobcat-1
     ports:
-      - "7771:7771" # 端口
+      - target: 9848
+        published: 9848
+        protocol: tcp
+        mode: host  #采用host模式（默认为ingress，配置较灵活，根据自己的需求也可调整为ingress，本案例防止nacos 采用 swarm集群调度，所以改为host模式，两台服务器之间通过内网及nacos端口访问，通过nginx配置对外服务）
+    volumes:
+      - cluster1_logs:/home/nacos/logs  #配置docker存储日志的卷
+    environment:
+      PREFER_HOST_MODE: ip
+      NACOS_SERVERS: 10.47.4.66:9848 10.47.4.67:9849 10.47.4.68:9850 10.47.4.68:9851
+      NACOS_SERVER_IP: 10.47.4.66
+      NACOS_SERVER_PORT: 9848
+      MYSQL_SERVICE_HOST: 10.47.4.66
+      MYSQL_SERVICE_DB_NAME: nacos_config
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: lihui_123
+    deploy:
+      replicas: 1       #部署时，指定部署一个副本
+      placement:
+        constraints:
+          - node.labels.env==RD-TGS-service-001  #根据标签指定部署到的节点，标签需要自己事先配置好（本案例节点docker-server-1为192.168.62.37   docker-server-2为192.168.62.15）
+      restart_policy:
+        condition: on-failure
+  nacos_cluster_2:
+    container_name: nacos_cluster_2
+    image: nacos/nacos-server:1.2.0
+    restart: always
+    ports:
+      - target: 9849
+        published: 9849
+        protocol: tcp
+        mode: host
+    volumes:
+      - cluster2_logs:/home/nacos/logs
+    environment:
+      PREFER_HOST_MODE: ip
+      NACOS_SERVERS: 10.47.4.66:9848 10.47.4.67:9849 10.47.4.68:9850 10.47.4.68:9851
+      NACOS_SERVER_IP: 10.47.4.67
+      NACOS_SERVER_PORT: 9849
+      MYSQL_SERVICE_HOST: 10.47.4.66
+      MYSQL_SERVICE_DB_NAME: nacos_config
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: lihui_123
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.env==RD-TGS-service-002
+      restart_policy:
+        condition: on-failure
+  nacos_cluster_3:
+    container_name: nacos_cluster_3
+    image: nacos/nacos-server:1.2.0
+    restart: always
+    ports:
+      - target: 9850
+        published: 9850
+        protocol: tcp
+        mode: host
+    volumes:
+      - cluster3_logs:/home/nacos/logs
+    environment:
+      PREFER_HOST_MODE: ip
+      NACOS_SERVERS: 10.47.4.66:9848 10.47.4.67:9849 10.47.4.68:9850 10.47.4.68:9851
+      NACOS_SERVER_IP: 10.47.4.68
+      NACOS_SERVER_PORT: 9850
+      MYSQL_SERVICE_HOST: 10.47.4.66
+      MYSQL_SERVICE_DB_NAME: nacos_config
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: lihui_123
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.env==RD-TGS-service-003
+      restart_policy:
+        condition: on-failure
+  nacos_cluster_4:
+    container_name: nacos_cluster_4
+    image: nacos/nacos-server:1.2.0
+    restart: always
+    ports:
+      - target: 9851
+        published: 9851
+        protocol: tcp
+        mode: host
+    volumes:
+      - cluster4_logs:/home/nacos/logs
+    environment:
+      PREFER_HOST_MODE: ip
+      NACOS_SERVERS: 10.47.4.66:9848 10.47.4.67:9849 10.47.4.68:9850 10.47.4.68:9851
+      NACOS_SERVER_IP: 10.47.4.68
+      NACOS_SERVER_PORT: 9851
+      MYSQL_SERVICE_HOST: 10.47.4.66
+      MYSQL_SERVICE_DB_NAME: nacos_config
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_USER: root
+      MYSQL_SERVICE_PASSWORD: lihui_123
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.labels.env==RD-TGS-service-003
+      restart_policy:
+        condition: on-failure
 
-  service-bobcat-2:
-    restart: always
-    volumes:
-      - "/usr/local/logs:/logs/"
-      - "/etc/localtime:/etc/localtime"
-    build:
-      context: .
-      dockerfile: Dockerfile7772
-    image: service-bobcat-2
-    ports:
-      - "7772:7772" # 端口
-
-  service-bobcat-3:
-    restart: always
-    volumes:
-      - "/usr/local/logs:/logs/"
-      - "/etc/localtime:/etc/localtime"
-    build:
-      context: .
-      dockerfile: Dockerfile7773
-    image: service-bobcat-3
-    ports:
-      - "7773:7773" # 端口
-networks:
-  default:
-    external:
-      name: bobcat-net
+volumes:
+  cluster1_logs:
+  cluster2_logs:
+  cluster3_logs:
+  cluster4_logs:

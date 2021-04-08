@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hui.tgs.dao.db17.TgsDao">
+
+    <resultMap id="addMap" type="com.hui.commonutils.been.TgsParameter">
+        <result column="I_WO" property="wo" />
+        <result column="I_SN" property="sn" />
+        <result column="I_OP" property="op" />
+        <result column="I_KPSN" property="kpsn" />
+        <result column="I_LOT" property="lotno" />
+        <result column="I_TOOL" property="tooling" />
+        <result column="I_MACHINE" property="machine" />
+        <result column="I_TERMINAL" property="terminal" />
+        <result column="I_CAVITY" property="cavity" />
+        <result column="I_TEST_DATA" property="testData" />
+        <result column="I_RESULT_DATA" property="results" />
+        <result column="I_SQL" property="sql" />
+        <result column="I_CSN" property="csn" />
+        <result column="TRES" property="res" />
+    </resultMap>
+
+    <resultMap id="addLogMap" type="com.hui.commonutils.been.TgsParameter">
+        <result column="I_SN" property="sn" />
+        <result column="I_TERMINAL" property="terminal" />
+        <result column="I_STR" property="strSql" />
+        <result column="I_APTIME" property="sendTime" />
+        <result column="TRES" property="res" />
+    </resultMap>
+
+    <resultMap id="attMap" type="com.hui.commonutils.been.TgsParameter">
+        <result column="I_WO" property="wo" />
+        <result column="I_SN" property="sn" />
+        <result column="I_OP" property="op" />
+        <result column="I_KPSN" property="kpsn" />
+        <result column="I_LOT" property="lotno" />
+        <result column="I_TOOL" property="tooling" />
+        <result column="I_MACHINE" property="machine" />
+        <result column="I_TERMINAL" property="terminal" />
+        <result column="I_CAVITY" property="cavity" />
+        <result column="I_TEST_DATA" property="testData" />
+        <result column="I_RESULT_DATA" property="results" />
+        <result column="I_STATUS" property="status" />
+        <result column="I_DEFECT_CODE" property="defectCode" />
+        <result column="I_P" property="p" />
+        <result column="I_QTY" property="qty" />
+        <result column="TRES" property="res" />
+    </resultMap>
+
+    <resultMap id="uopMap" type="com.hui.commonutils.been.TgsParameter">
+        <result column="I_TERMINAL" property="terminal" />
+        <result column="I_OP" property="op" />
+        <result column="I_WO" property="wo" />
+        <result column="I_SN" property="sn" />
+        <result column="I_KPSN" property="kpsn" />
+        <result column="I_LOT" property="lotno" />
+        <result column="I_TOOL" property="tooling" />
+        <result column="I_MACHINE" property="machine" />
+        <result column="I_CSN" property="csn" />
+        <result column="TRES" property="res" />
+    </resultMap>
+
+    <select id="callAdd" statementType="CALLABLE" parameterType="com.hui.commonutils.been.TgsParameter" resultMap="addMap">
+        call SAJET.SJ_AUTOMATIC_INTERFACE_ADD(
+        #{wo,mode=IN,jdbcType=VARCHAR} ,
+        #{sn,mode=IN,jdbcType=VARCHAR} ,
+        #{op,mode=IN,jdbcType=VARCHAR} ,
+        #{kpsn,mode=IN,jdbcType=VARCHAR} ,
+        #{lotno,mode=IN,jdbcType=VARCHAR},
+        #{tooling,mode=IN,jdbcType=VARCHAR},
+        #{machine,mode=IN,jdbcType=VARCHAR} ,
+        #{terminal,mode=IN,jdbcType=VARCHAR},
+        #{cavity,mode=IN,jdbcType=VARCHAR},
+        #{testData,mode=IN,jdbcType=VARCHAR} ,
+        #{results,mode=IN,jdbcType=VARCHAR},
+        #{sql,mode=IN,jdbcType=VARCHAR},
+        #{csn,mode=IN,jdbcType=VARCHAR},
+        #{res,mode=OUT,jdbcType=VARCHAR}
+        )
+    </select>
+
+    <select id="callAddLog" statementType="CALLABLE" parameterType="com.hui.commonutils.been.TgsParameter" resultMap="addLogMap">
+        call SAJET.SJ_AUTO_DATACOLLECT(
+        #{sn,mode=IN,jdbcType=VARCHAR} ,
+        #{terminal,mode=IN,jdbcType=VARCHAR} ,
+        #{strSql,mode=IN,jdbcType=VARCHAR} ,
+        #{sendTime,mode=IN,jdbcType=VARCHAR},
+        #{res,mode=OUT,jdbcType=VARCHAR}
+        )
+    </select>
+
+    <select id="callAtt" statementType="CALLABLE" parameterType="com.hui.commonutils.been.TgsParameter" resultMap="attMap">
+        call SAJET.SJ_GETTING_COMMAND_PS(
+        #{wo,mode=IN,jdbcType=VARCHAR} ,
+        #{sn,mode=IN,jdbcType=VARCHAR} ,
+        #{op,mode=IN,jdbcType=VARCHAR} ,
+        #{kpsn,mode=IN,jdbcType=VARCHAR},
+        #{lotno,mode=IN,jdbcType=VARCHAR} ,
+        #{tooling,mode=IN,jdbcType=VARCHAR} ,
+        #{machine,mode=IN,jdbcType=VARCHAR} ,
+        #{terminal,mode=IN,jdbcType=VARCHAR},
+        #{cavity,mode=IN,jdbcType=VARCHAR} ,
+        #{testData,mode=IN,jdbcType=VARCHAR} ,
+        #{results,mode=IN,jdbcType=VARCHAR} ,
+        #{status,mode=IN,jdbcType=VARCHAR},
+        #{defectCode,mode=IN,jdbcType=VARCHAR} ,
+        #{p,mode=IN,jdbcType=VARCHAR} ,
+        #{qty,mode=IN,jdbcType=VARCHAR} ,
+        #{res,mode=OUT,jdbcType=VARCHAR}
+        )
+    </select>
+
+    <select id="callUop" statementType="CALLABLE" parameterType="com.hui.commonutils.been.TgsParameter" resultMap="uopMap">
+        call SAJET.SJ_AUTOMATIC_CHKKPSN_ROUTE(
+        #{terminal,mode=IN,jdbcType=VARCHAR},
+        #{op,mode=IN,jdbcType=VARCHAR},
+        #{wo,mode=IN,jdbcType=VARCHAR},
+        #{sn,mode=IN,jdbcType=VARCHAR},
+        #{kpsn,mode=IN,jdbcType=VARCHAR},
+        #{lotno,mode=IN,jdbcType=VARCHAR},
+        #{tooling,mode=IN,jdbcType=VARCHAR},
+        #{machine,mode=IN,jdbcType=VARCHAR},
+        #{csn,mode=IN,jdbcType=VARCHAR},
+        #{res,mode=OUT,jdbcType=VARCHAR}
+        )
+    </select>
+
+</mapper>

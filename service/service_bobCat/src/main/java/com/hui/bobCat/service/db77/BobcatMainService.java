@@ -1,6 +1,7 @@
 package com.hui.bobCat.service.db77;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hui.bobCat.been.BobcatErrorLog;
 import com.hui.bobCat.been.SjTransferPdcaInput;
 import com.hui.commonutils.R;
 import com.hui.commonutils.been.BobcatParameter;
@@ -15,5 +16,6 @@ import com.hui.commonutils.been.BobcatParameter;
 public interface BobcatMainService extends IService<SjTransferPdcaInput>{
 
      Boolean bobcatInfoDeal(BobcatParameter params);
+
 
 }

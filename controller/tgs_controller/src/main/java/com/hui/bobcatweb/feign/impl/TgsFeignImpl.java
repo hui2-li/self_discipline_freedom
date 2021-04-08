@@ -1,29 +1,29 @@
 package com.hui.bobcatweb.feign.impl;
 
-import com.hui.bobcatweb.feign.BobcatMainFeign;
-import com.hui.commonutils.been.BobcatParameter;
+import com.hui.bobcatweb.feign.TgsFeign;
+import com.hui.commonutils.been.TgsParameter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
  * @author lihui
- * @title: BobcatMainFeignImpl
+ * @title: TgsFeignImpl
  * @projectName self_discipline_freedom
  * @description: TODO
- * @date 2020/12/1516:01
+ * @date 2020/04/07 18:01
  */
 @Slf4j
 @Component
-public class BobcatMainFeignImpl implements BobcatMainFeign {
+public class TgsFeignImpl implements TgsFeign {
 
     @Setter
     private Throwable cause;
 
-    @Override
-    public Boolean bobCat(BobcatParameter params) {
-        log.error("feign调用异常"+cause);
-        return false;
-    }
 
+    @Override
+    public String tgs(TgsParameter tgsParameter) {
+        log.error("feign调用异常"+cause);
+        return null;
+    }
 }

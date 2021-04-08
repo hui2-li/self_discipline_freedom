@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>bobcat_controller</module>
+        <module>tgs_controller</module>
     </modules>
 
 

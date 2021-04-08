@@ -1,8 +1,6 @@
 package com.hui.commonutils.been;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 
@@ -107,4 +105,7 @@ public class BobcatParameter {
     private String errString            ;
     private String carrierPn            ;
     private String carrierDcId          ;
+
+    private String stringParameter      ;
+    private String errorMessage         ;
 }

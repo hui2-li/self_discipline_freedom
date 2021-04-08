@@ -1,6 +1,7 @@
 package com.hui.bobCat.controller;
 
 
+import com.hui.bobCat.been.BobcatErrorLog;
 import com.hui.bobCat.service.db77.BobcatMainService;
 import com.hui.commonutils.R;
 import com.hui.commonutils.been.BobcatParameter;
@@ -37,12 +38,12 @@ public class BobcatMainController {
         return bobcatMainService.bobcatInfoDeal(params);
     }
 
+
     @ApiOperation("测试")
     @RequestMapping(value = "/test")
-    public String BobCat(@RequestBody BobcatParameter params) throws Exception {
+    public int BobCat(@RequestBody BobcatErrorLog logParams){
 
-        //return bobcatMainService.tt(params);
-        return null;
+        return 0;
     }
 
 }

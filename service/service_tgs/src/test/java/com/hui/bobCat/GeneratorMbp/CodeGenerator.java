@@ -76,7 +76,7 @@ public class CodeGenerator {
 
         });
         //dsc.setUrl("jdbc:oracle:thin:@10.162.244.77:1521:JFTRACE");
-        dsc.setUrl("jdbc:oracle:thin:@10.162.244.77:1521:JFTRACE");
+        dsc.setUrl("jdbc:oracle:thin:@10.132.118.237:1521:DEDICATED");
         dsc.setDriverName("oracle.jdbc.OracleDriver");
         dsc.setUsername("mes_xl");
         dsc.setPassword("xl_cai");
@@ -86,10 +86,10 @@ public class CodeGenerator {
         PackageConfig pc = new PackageConfig();
         pc.setParent("com.hui.bobCat");
         pc.setEntity("been");
-        pc.setMapper("dao.db77");
-        pc.setXml("mapper.db77");
-        pc.setService("service.db77");
-        pc.setServiceImpl("service.db77.impl");
+        pc.setMapper("dao.db237");
+        pc.setXml("mapper.db237");
+        pc.setService("service.db237");
+        pc.setServiceImpl("service.db237.impl");
         pc.setController("controller");
         mpg.setPackageInfo(pc);
 
@@ -99,7 +99,7 @@ public class CodeGenerator {
         /**
          *  此处是表名，区分大小写（注意）oracle一般是大写
          */
-        strategy.setInclude(new String[]{"SAJET.BOBCAT_ERROR_LOG"});
+        strategy.setInclude(new String[]{"SAJET.SJ_AUTOMATIC_CHKKPSN_ROUTE_LOG"});
 
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         //strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀

@@ -1,7 +1,6 @@
 package com.hui.bobcatweb.feign;
 
 import com.hui.bobcatweb.feign.impl.BobcatMainFeignImpl;
-import com.hui.commonutils.R;
 import com.hui.commonutils.been.BobcatParameter;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestBody;

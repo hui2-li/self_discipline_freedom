@@ -2,7 +2,6 @@ package com.hui.bobcatweb.controller;
 
 import com.hui.bobcatweb.feign.BobcatMainFeign;
 import com.hui.bobcatweb.util.IPUtil;
-import com.hui.commonutils.R;
 import com.hui.commonutils.been.BobcatParameter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -50,7 +49,6 @@ public class BobcatMainController {
                     "\t\nQueryString: " + request.getQueryString() +
                     "\t\nContent-Type: " + request.getHeader("Content-Type") +
                     sb);
-
             /*System.out.println("打印接受数据"+"\t\nIP: " + request.getRemoteAddr() +
                     "\t\nURL: " + IPUtil.getIpAddress(request) +
                     "\t\nURL: " + IPUtil.getLocalHostIP() +
@@ -60,6 +58,13 @@ public class BobcatMainController {
                     sb);*/
         }
         BobcatParameter params = new BobcatParameter();
+        params.setStringParameter("\t\nIP: " + request.getRemoteAddr() +
+                "\t\nURL: " + IPUtil.getIpAddress(request) +
+                "\t\nURL: " + IPUtil.getLocalHostIP() +
+                "\t\nCommand : " + s +
+                "\t\nQueryString: " + request.getQueryString() +
+                "\t\nContent-Type: " + request.getHeader("Content-Type") +
+                sb);
         params.setSn(request.getParameter("sn"));
         params.setDefect(request.getParameter("defect"));
         params.setInProcessTime(request.getParameter("start_time"));
