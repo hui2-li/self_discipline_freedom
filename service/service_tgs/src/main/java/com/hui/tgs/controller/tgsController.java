@@ -22,7 +22,7 @@ public class tgsController {
     @Autowired
     private TgsService tgsService;
 
-    @ApiOperation(value = "tgs接口测试")
+    @ApiOperation(value = "tgs接口")
     @RequestMapping(value = "/index.cgx",method = RequestMethod.POST)
     @ResponseBody
     public String tgsController(TgsParameter tgsParameter){
